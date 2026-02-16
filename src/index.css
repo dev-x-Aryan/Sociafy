@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Define custom animations using the new theme system */
+@theme {
+  --animate-typing: typing 3s steps(30, end);
+  --animate-blink: blink 1s step-end infinite;
+}
+
+/* Keyframes */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+}
