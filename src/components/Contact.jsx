@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Contact = () => {
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/meelkabq", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (res.ok) {
+        setStatus("SUCCESS");
+        form.reset();
+      } else {
+        setStatus("ERROR");
+      }
+    } catch (err) {
+      setStatus("ERROR");
+    }
+  };
+
   return (
     <>
       {/* CONTACT SECTION */}
@@ -25,27 +53,60 @@ const Contact = () => {
           </div>
 
           {/* RIGHT: FORM */}
-          <form className="bg-[#F6EEE6] p-8 rounded-xl shadow-lg border border-gray-100 space-y-4">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#F6EEE6] p-8 rounded-xl shadow-lg border border-gray-100 space-y-4"
+          >
+
+            {/* hidden metadata */}
+            <input
+              type="hidden"
+              name="Submitted At"
+              value={new Date().toLocaleString("en-IN", {
+                dateStyle: "medium",
+                timeStyle: "short",
+              })}
+            />
 
             <input
+              type="hidden"
+              name="Timezone"
+              value={Intl.DateTimeFormat().resolvedOptions().timeZone}
+            />
+
+            <input
+              type="hidden"
+              name="Source"
+              value="Sociafy Website"
+            />
+
+            {/* form fields */}
+            <input
               type="text"
+              name="name"
+              required
               placeholder="Your Name"
               className="w-full p-3 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E39A3B]"
             />
 
             <input
               type="email"
+              name="email"
+              required
               placeholder="Your Email"
               className="w-full p-3 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E39A3B]"
             />
 
             <input
               type="tel"
+              name="phone"
               placeholder="Phone Number"
               className="w-full p-3 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E39A3B]"
             />
 
             <textarea
+              name="message"
+              required
               rows="4"
               placeholder="Tell us about your project"
               className="w-full p-3 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E39A3B]"
@@ -58,6 +119,18 @@ const Contact = () => {
               Send Message
             </button>
 
+            {/* status messages */}
+            {status === "SUCCESS" && (
+              <p className="text-green-600 text-sm text-center">
+                ✅ Message sent successfully!
+              </p>
+            )}
+
+            {status === "ERROR" && (
+              <p className="text-red-600 text-sm text-center">
+                ❌ Something went wrong. Try again.
+              </p>
+            )}
           </form>
         </div>
       </section>
@@ -73,7 +146,6 @@ const Contact = () => {
               Turning social into real brand growth. We help businesses scale digitally with strategy, creativity, and performance.
             </p>
           </div>
-
 
           {/* Social */}
           <div>
