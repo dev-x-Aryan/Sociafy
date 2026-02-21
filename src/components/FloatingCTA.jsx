@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEnvelope, FaInstagram, FaLinkedin, FaComments } from "react-icons/fa";
+import { FaEnvelope, FaInstagram, FaLinkedin, FaComments, FaFacebook } from "react-icons/fa";
 
 const FloatingCTA = () => {
   const [open, setOpen] = useState(false);
@@ -16,6 +16,12 @@ const FloatingCTA = () => {
       link: "https://instagram.com/sociafy_marketing",
       color: "bg-pink-500",
       label: "Instagram",
+    },
+    {
+      icon: <FaFacebook />,
+      link: "https://www.facebook.com/profile.php?id=61587629194460&sk=about",
+      color: "bg-blue-800",
+      label: "Facebook",
     },
     {
       icon: <FaLinkedin />,

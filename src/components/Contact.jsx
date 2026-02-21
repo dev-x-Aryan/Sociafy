@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faLinkedin, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -215,6 +215,16 @@ const Contact = () => {
                 className="hover:text-[#E39A3B] hover:scale-110 transition duration-300"
               >
                 <FontAwesomeIcon icon={faInstagram} />
+              </a>
+
+              {/*Facebook */}
+              <a
+                href="https://www.facebook.com/profile.php?id=61587629194460&sk=about"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#E39A3B] hover:scale-110 transition duration-300"
+              >
+                <FontAwesomeIcon icon={faFacebook} />
               </a>
 
               {/* LinkedIn */}
