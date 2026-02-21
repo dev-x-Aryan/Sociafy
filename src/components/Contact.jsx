@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const [status, setStatus] = useState("");
+  const sectionRef = useRef(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,14 +39,62 @@ const Contact = () => {
     }
   };
 
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+
+      gsap.from(".contact-left", {
+        x: -60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "restart none none none",
+        },
+      });
+
+
+      gsap.from(".contact-form", {
+        x: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "restart none none none",
+        },
+      });
+
+      // FOOTER FADE UP
+      gsap.from(".footer-animate", {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".footer-animate",
+          start: "top 95%",
+        },
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
-      {/* CONTACT SECTION */}
-      <section id="contact" className="scroll-mt-18 bg-white py-20">
+      <section
+        ref={sectionRef}
+        id="contact"
+        className="scroll-mt-18 bg-white py-20"
+      >
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
 
-          {/* LEFT: TEXT */}
-          <div>
+          <div className="contact-left">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A1A]">
               Let’s Grow Your Brand 🚀
             </h2>
@@ -46,16 +104,16 @@ const Contact = () => {
             </p>
 
             <div className="mt-6 space-y-3 text-gray-700">
-              <p>📞 +91 90519 48752</p>
-              <p>📞 +91 82406 59087</p>
+              <p>📞 +91 90519 48752 - Rohit Agarwal</p>
+              <p>📞 +91 82406 59087 - Nikita Jain</p>
               <p>📧 marketing.sociafy@gmail.com</p>
             </div>
           </div>
 
-          {/* RIGHT: FORM */}
+          {/* RIGHT FORM */}
           <form
             onSubmit={handleSubmit}
-            className="bg-[#F6EEE6] p-8 rounded-xl shadow-lg border border-gray-100 space-y-4"
+            className="contact-form bg-[#F6EEE6] p-8 rounded-xl shadow-lg border border-gray-100 space-y-4"
           >
 
             {/* hidden metadata */}
@@ -80,7 +138,7 @@ const Contact = () => {
               value="Sociafy Website"
             />
 
-            {/* form fields */}
+            {/* inputs */}
             <input
               type="text"
               name="name"
@@ -119,7 +177,7 @@ const Contact = () => {
               Send Message
             </button>
 
-            {/* status messages */}
+            {/* status */}
             {status === "SUCCESS" && (
               <p className="text-green-600 text-sm text-center">
                 ✅ Message sent successfully!
@@ -135,34 +193,52 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-[#1A1A1A] text-white py-10">
-        <div className="md:grid-cols-2 gap-8max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <footer className="footer-animate bg-[#1A1A1A] text-white py-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
 
-          {/* Brand */}
           <div>
             <h3 className="text-xl font-semibold">Sociafy Marketing</h3>
             <p className="text-gray-400 mt-3 text-sm">
-              Turning social into real brand growth. We help businesses scale digitally with strategy, creativity, and performance.
+              Turning social into real brand growth.
             </p>
           </div>
 
-          {/* Social */}
           <div>
             <h4 className="font-semibold mb-3">Follow Us</h4>
-            <div className="flex gap-4 text-gray-400 text-lg">
-              <a href="#" className="hover:text-[#E39A3B]">🌐</a>
-              <a href="#" className="hover:text-[#E39A3B]">📸</a>
-              <a href="#" className="hover:text-[#E39A3B]">💼</a>
-              <a href="#" className="hover:text-[#E39A3B]">▶️</a>
+            <div className="flex gap-5 text-xl text-gray-400">
+
+              {/* Instagram */}
+              <a
+                href="https://instagram.com/sociafy_marketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#E39A3B] hover:scale-110 transition duration-300"
+              >
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com/company/sociafymarketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#E39A3B] hover:scale-110 transition duration-300"
+              >
+                <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+
+              {/* Email (Gmail) */}
+              <a
+                href="mailto:marketing.sociafy@gmail.com?subject=Business Inquiry&body=Hi Sociafy, I want to grow my brand."
+                className="hover:text-[#E39A3B] hover:scale-110 transition duration-300"
+              >
+                <FontAwesomeIcon icon={faEnvelope} />
+              </a>
+
             </div>
+
           </div>
 
-        </div>
-
-        {/* Bottom line */}
-        <div className="text-center text-gray-500 text-sm mt-8 border-t border-gray-700 pt-4">
-          © {new Date().getFullYear()} Sociafy Marketing. All rights reserved.
         </div>
       </footer>
     </>

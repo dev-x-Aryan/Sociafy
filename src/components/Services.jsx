@@ -30,7 +30,7 @@ const Services = () => {
           if (entry.isIntersecting) {
             entry.target.classList.add("show");
           } else {
-            entry.target.classList.remove("show"); // replay on scroll back
+            entry.target.classList.remove("show");
           }
         });
       },
@@ -45,7 +45,6 @@ const Services = () => {
   return (
     <section id="services" ref={containerRef} className="bg-white py-20">
 
-      {/* HEADER */}
       <div className="text-center mb-16 px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-[#1A1A1A]">
           Our Services
