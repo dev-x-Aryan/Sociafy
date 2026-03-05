@@ -107,6 +107,7 @@ const Contact = () => {
               <p>📞 +91 90519 48752 - Rohit Agarwal</p>
               <p>📞 +91 82406 59087 - Nikita Jain</p>
               <p>📧 marketing.sociafy@gmail.com</p>
+              <p className="flex gap-2"><span>📍</span> <span>RDB Boulevard, 5th Floor<br/>   Sector V, Salt Lake<br/>   Kolkata, West-Bengal, 700091, India</span></p>
             </div>
           </div>
 
@@ -194,7 +195,7 @@ const Contact = () => {
       </section>
 
       <footer className="footer-animate bg-[#1A1A1A] text-white py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start  gap-8">
 
           <div>
             <h3 className="text-xl font-semibold">Sociafy Marketing</h3>
@@ -204,7 +205,15 @@ const Contact = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3">Follow Us</h4>
+            <h3 className="text-xl font-semibold">Office address</h3>
+            <p className="text-gray-400 mt-3 text-sm">RDB Boulevard, 5th Floor <br/>
+                    Sector V, Salt Lake<br/>
+                    Kolkata, West-Bengal, 700091, India
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-semibold mb-3">Follow Us</h3>
             <div className="flex gap-5 text-xl text-gray-400">
 
               {/* Instagram */}
